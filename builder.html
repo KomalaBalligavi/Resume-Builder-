@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume Builder | GMU Resume Builder</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <h1>GMU Resume Builder <span class="gmu-badge">GM UNIVERSITY</span></h1>
+      </div>
+      <nav>
+        <div class="nav-primary">
+          <a href="index.html">Home</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="builder.html" class="active">Resume Builder</a>
+        </div>
+        <div class="nav-auth">
+          <span id="userWelcome">Welcome, Student!</span>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Progress Indicator -->
+    <div class="progress-container" id="progressContainer" style="display: block !important; visibility: visible !important;">
+      <div class="progress-header">
+        <span class="progress-title">Resume Completion</span>
+        <span class="progress-percentage" id="progressPercentage">0%</span>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
+      </div>
+      <div class="progress-steps">
+        <span class="progress-step" id="stepPersonal">Personal Info</span>
+        <span class="progress-step" id="stepEducation">Education</span>
+        <span class="progress-step" id="stepExperience">Experience</span>
+        <span class="progress-step" id="stepSkills">Skills</span>
+      </div>
+    </div>
+
+    <!-- Template Selector -->
+    <div class="template-selector-section">
+      <h2>Choose Your Resume Template</h2>
+      <div class="template-selector">
+        <div class="template-option active" data-template="template1">
+          <div class="template-preview-box template1-preview">
+            <div class="template-preview-header">Template 1</div>
+            <div class="template-preview-content">Modern Single Column</div>
+          </div>
+          <span>Template 1 - Modern</span>
+        </div>
+        <div class="template-option" data-template="template2">
+          <div class="template-preview-box template2-preview">
+            <div class="template-preview-header">Template 2</div>
+            <div class="template-preview-content">Two Column Layout</div>
+          </div>
+          <span>Template 2 - Classic</span>
+        </div>
+        <div class="template-option" data-template="template3">
+          <div class="template-preview-box template3-preview">
+            <div class="template-preview-header">Template 3</div>
+            <div class="template-preview-content">Professional Clean</div>
+          </div>
+          <span>Template 3 - Professional</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI Assist Modal Trigger -->
+    <div style="text-align: right; margin: 1rem 0;">
+      <button id="openAiAssist" class="btn btn-secondary">AI Assist</button>
+    </div>
+
+    <!-- AI Assist Modal -->
+    <div id="aiAssistModal" class="ai-modal" aria-hidden="true" style="display:none;">
+      <div class="ai-modal-content">
+        <button class="ai-close">×</button>
+        <h3>AI Assist — Generate Bullet Points</h3>
+        <p style="font-size:0.95rem; color:var(--text-light);">Paste a job/experience description below or focus any experience textarea, then click <strong>Generate</strong>.</p>
+        <div class="form-group">
+          <label for="aiTitle">Title (optional)</label>
+          <input id="aiTitle" type="text" placeholder="e.g., Software Developer Intern">
+        </div>
+        <div class="form-group">
+          <label for="aiDescription">Description</label>
+          <textarea id="aiDescription" rows="6" placeholder="Describe your responsibilities or achievements..."></textarea>
+        </div>
+        <div style="display:flex; gap:0.5rem; align-items:center;">
+          <button id="generateBullets" class="btn">Generate</button>
+          <button id="insertBullets" class="btn btn-secondary" disabled>Insert into field</button>
+          <div id="aiSpinner" style="display:none; margin-left:1rem;">Generating…</div>
+        </div>
+        <div id="aiResults" style="margin-top:1rem;"></div>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <!-- Form Section -->
+      <div class="form-section">
+        <div class="section-tabs">
+          <div class="tab active" data-tab="personal"><i class="fas fa-user"></i> Personal Info</div>
+          <div class="tab" data-tab="education"><i class="fas fa-graduation-cap"></i> Education</div>
+          <div class="tab" data-tab="experience"><i class="fas fa-briefcase"></i> Experience</div>
+          <div class="tab" data-tab="projects"><i class="fas fa-code"></i> Projects</div>
+          <div class="tab" data-tab="skills"><i class="fas fa-tools"></i> Skills</div>
+          <div class="tab" data-tab="achievements"><i class="fas fa-trophy"></i> Achievements</div>
+          <div class="tab" data-tab="certifications"><i class="fas fa-certificate"></i> Certifications</div>
+          <div class="tab" data-tab="hackathons"><i class="fas fa-code-branch"></i> Hackathons</div>
+          <div class="tab" data-tab="languages"><i class="fas fa-language"></i> Languages</div>
+        </div>
+        
+        <!-- Personal Info Tab -->
+        <div class="tab-content active" id="personal-tab">
+          <h2>Personal Information</h2>
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" placeholder="John Doe">
+          </div>
+
+          <div class="form-group">
+            <label for="profileImage">Profile Photo (Optional)</label>
+            <div class="image-upload-container">
+              <div class="image-preview" id="imagePreview">
+                <img src="" alt="Profile Preview" class="image-preview__image" style="display: none;">
+                <span class="image-preview__default-text">No image selected</span>
+              </div>
+              <input type="file" id="profileImage" accept="image/*" class="image-upload-input">
+              <label for="profileImage" class="btn btn-secondary image-upload-btn">Choose Image</label>
+              <button type="button" id="removeImage" class="remove-btn" style="display: none;">Remove Image</button>
+            </div>
+            <small class="form-help">Recommended: Square image, 200x200 pixels, max 2MB</small>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="jdoe@gmu.edu">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" placeholder="(123) 456-7890">
+          </div>
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" id="address" placeholder="City, State">
+          </div>
+          <div class="form-group">
+            <label for="linkedin">LinkedIn Profile (optional)</label>
+            <input type="url" id="linkedin" placeholder="https://linkedin.com/in/johndoe">
+          </div>
+          <div class="form-group">
+            <label for="portfolio">Portfolio/Website (optional)</label>
+            <input type="url" id="portfolio" placeholder="https://johndoe.dev">
+          </div>
+          <div class="form-group">
+            <label for="summary">Professional Summary / Career Objective</label>
+            <textarea id="summary" placeholder="Brief overview of your professional background and career objectives"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="github">GitHub Profile (optional)</label>
+            <input type="url" id="github" placeholder="https://github.com/username">
+          </div>
+        </div>
+        
+        <!-- Education Tab -->
+        <div class="tab-content" id="education-tab">
+          <h2>Education</h2>
+          <div id="education-container">
+            <div class="education-item form-group">
+              <div class="form-group">
+                <label for="school1">Institution</label>
+                <input type="text" id="school1" placeholder="GM UNIVERSITY">
+              </div>
+              <div class="form-group">
+                <label for="degree1">Degree</label>
+                <input type="text" id="degree1" placeholder="Bachelor of Science in Computer Science">
+              </div>
+                  <div class="form-group">
+                <label for="gpa1">GPA / CGPA</label>
+                <input type="text" id="gpa1" placeholder="3.8 or 8.2/10">
+              </div>
+              <div class="form-group">
+                <label for="gradDate1">Graduation Date</label>
+                <input type="month" id="gradDate1">
+              </div>
+              <div class="form-group">
+                <label for="coursework1">Relevant Coursework (comma separated)</label>
+                <input type="text" id="coursework1" placeholder="Machine Learning, Data Science, AI">
+              </div>
+              <div class="form-group">
+                <label for="location1">Location</label>
+                <input type="text" id="location1" placeholder="City, State">
+              </div>
+            </div>
+          </div>
+          <button class="add-btn" id="addEducation">+ Add Another Education</button>
+        </div>
+        
+        <!-- Experience Tab -->
+        <div class="tab-content" id="experience-tab">
+          <h2>Work Experience</h2>
+          <div id="experience-container">
+            <div class="experience-item form-group">
+              <div class="form-group">
+                <label for="company1">Company</label>
+                <input type="text" id="company1" placeholder="Tech Company Inc.">
+              </div>
+              <div class="form-group">
+                <label for="position1">Position</label>
+                <input type="text" id="position1" placeholder="Software Developer Intern">
+              </div>
+              <div class="form-group">
+                <label for="startDate1">Start Date</label>
+                <input type="month" id="startDate1">
+              </div>
+              <div class="form-group">
+                <label for="endDate1">End Date</label>
+                <input type="month" id="endDate1">
+              </div>
+              <div class="form-group">
+                <label for="expDescription1">Description (one per line for bullet points)</label>
+                <textarea id="expDescription1" placeholder="Describe your responsibilities and achievements (each line becomes a bullet point)"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="expLocation1">Location</label>
+                <input type="text" id="expLocation1" placeholder="City, State">
+              </div>
+            </div>
+          </div>
+          <button class="add-btn" id="addExperience">+ Add Another Experience</button>
+        </div>
+        
+        <!-- Projects Tab -->
+        <div class="tab-content" id="projects-tab">
+          <h2>Projects</h2>
+          <div id="projects-container">
+            <div class="project-item form-group">
+              <div class="form-group">
+                <label for="projectName1">Project Name</label>
+                <input type="text" id="projectName1" placeholder="Project Name">
+              </div>
+              <div class="form-group">
+                <label for="projectTech1">Technologies Used (comma separated)</label>
+                <input type="text" id="projectTech1" placeholder="React, Node.js, MongoDB">
+              </div>
+              <div class="form-group">
+                <label for="projectLink1">Project Link (optional)</label>
+                <input type="url" id="projectLink1" placeholder="https://project-url.com">
+              </div>
+              <div class="form-group">
+                <label for="projectDate1">Date</label>
+                <input type="month" id="projectDate1">
+              </div>
+              <div class="form-group">
+                <label for="projectDescription1">Description (one per line for bullet points)</label>
+                <textarea id="projectDescription1" placeholder="Describe your project (each line becomes a bullet point)"></textarea>
+              </div>
+            </div>
+          </div>
+          <button class="add-btn" id="addProject">+ Add Another Project</button>
+        </div>
+        
+        <!-- Skills Tab -->
+        <div class="tab-content" id="skills-tab">
+          <h2>Technical Skills</h2>
+          <div class="form-group">
+            <label for="skillsLanguages">Languages (comma separated)</label>
+            <input type="text" id="skillsLanguages" placeholder="Python, JavaScript, Java, C++">
+          </div>
+          <div class="form-group">
+            <label for="skillsTechnologies">Technologies & Frameworks (comma separated)</label>
+            <input type="text" id="skillsTechnologies" placeholder="React, Laravel, TensorFlow, PyTorch">
+          </div>
+          <div class="form-group">
+            <label for="skillsConcepts">Concepts (comma separated)</label>
+            <input type="text" id="skillsConcepts" placeholder="Machine Learning, DBMS, API, NLP">
+          </div>
+          <div class="form-group">
+            <label for="skillsInput">Other Skills (comma separated or press Enter)</label>
+            <input type="text" id="skillsInput" placeholder="JavaScript, Python, React, Data Analysis">
+          </div>
+          <div class="skills-list" id="skillsPreview">
+            <!-- Skills will be dynamically added here -->
+          </div>
+        </div>
+        
+        <!-- Achievements Tab -->
+        <div class="tab-content" id="achievements-tab">
+          <h2>Achievements & Certifications</h2>
+          <div id="achievements-container">
+            <div class="achievement-item form-group">
+              <div class="form-group">
+                <label for="achievementTitle1">Achievement/Certification Title</label>
+                <input type="text" id="achievementTitle1" placeholder="Dean's List Award">
+              </div>
+              <div class="form-group">
+                <label for="achievementOrg1">Organization</label>
+                <input type="text" id="achievementOrg1" placeholder="GM UNIVERSITY">
+              </div>
+              <div class="form-group">
+                <label for="achievementDate1">Date Received</label>
+                <input type="month" id="achievementDate1">
+              </div>
+              <div class="form-group">
+                <label for="achievementDesc1">Description</label>
+                <textarea id="achievementDesc1" placeholder="Awarded for academic excellence..."></textarea>
+              </div>
+            </div>
+          </div>
+          <button class="add-btn" id="addAchievement">+ Add Another Achievement</button>
+        </div>
+        
+        <!-- Certifications Tab -->
+        <div class="tab-content" id="certifications-tab">
+          <h2>Certifications</h2>
+          <div id="certifications-container">
+            <div class="certification-item form-group">
+              <div class="form-group">
+                <label for="certIssuer1">Issuing Organization</label>
+                <input type="text" id="certIssuer1" placeholder="freeCodeCamp, NPTEL, CISCO">
+              </div>
+              <div class="form-group">
+                <label for="certName1">Certification Name</label>
+                <input type="text" id="certName1" placeholder="Responsive Web Design, JavaScript">
+              </div>
+              <div class="form-group">
+                <label for="certDate1">Date Received</label>
+                <input type="month" id="certDate1">
+              </div>
+            </div>
+          </div>
+          <button class="add-btn" id="addCertification">+ Add Another Certification</button>
+        </div>
+        
+        <!-- Hackathons Tab -->
+        <div class="tab-content" id="hackathons-tab">
+          <h2>Hackathons</h2>
+          <div id="hackathons-container">
+            <div class="hackathon-item form-group">
+              <div class="form-group">
+                <label for="hackathonName1">Hackathon Name & Award</label>
+                <input type="text" id="hackathonName1" placeholder="IGNITRON 2K24 Hackathon - 1st Place">
+              </div>
+              <div class="form-group">
+                <label for="hackathonLink1">Link (optional)</label>
+                <input type="url" id="hackathonLink1" placeholder="https://hackathon-link.com">
+              </div>
+              <div class="form-group">
+                <label for="hackathonDate1">Date</label>
+                <input type="month" id="hackathonDate1">
+              </div>
+              <div class="form-group">
+                <label for="hackathonDescription1">Description (one per line for bullet points)</label>
+                <textarea id="hackathonDescription1" placeholder="Describe your hackathon project (each line becomes a bullet point)"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="hackathonTech1">Technologies Used (comma separated)</label>
+                <input type="text" id="hackathonTech1" placeholder="Laravel, GEMINI API, Tailwind CSS">
+              </div>
+              <div class="form-group">
+                <label for="hackathonPrize1">Prize (optional)</label>
+                <input type="text" id="hackathonPrize1" placeholder="Rs. 25,000">
+              </div>
+            </div>
+          </div>
+          <button class="add-btn" id="addHackathon">+ Add Another Hackathon</button>
+        </div>
+        
+        <!-- Languages Tab -->
+        <div class="tab-content" id="languages-tab">
+          <h2>Languages</h2>
+          <div id="languages-container">
+            <div class="language-item form-group">
+              <div class="form-group">
+                <label for="language1">Language</label>
+                <input type="text" id="language1" placeholder="English">
+              </div>
+              <div class="form-group">
+                <label for="proficiency1">Proficiency Level</label>
+                <select id="proficiency1">
+                  <option value="">Select Proficiency</option>
+                  <option value="Native">Native</option>
+                  <option value="Fluent">Fluent</option>
+                  <option value="Advanced">Advanced</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Basic">Basic</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <button class="add-btn" id="addLanguage">+ Add Another Language</button>
+        </div>
+        
+        <div class="action-buttons">
+          <button class="btn" id="saveBtn">Save Resume</button>
+          <button class="btn btn-secondary" id="resetBtn">Reset Form</button>
+          <button class="btn" id="exportBtn">Export PDF</button>
+        </div>
+      </div>
+      
+      <!-- Preview Section -->
+      <div class="preview-section">
+        <div class="preview-header">
+          <h2>Resume Preview</h2>
+          <button class="btn btn-secondary" id="downloadBtn"><i class="fas fa-download"></i> Download PDF</button>
+        </div>
+        <div class="resume-preview template1" id="resumePreview">
+          <div class="resume-header">
+            <div class="resume-name">Your Name</div>
+            <div class="resume-contact">
+              <span>email@example.com</span> • 
+              <span>(123) 456-7890</span> • 
+              <span>City, State</span>
+            </div>
+          </div>
+          
+          <div class="resume-section">
+            <div class="section-title">Professional Summary</div>
+            <p>Your professional summary will appear here.</p>
+          </div>
+          
+          <div class="resume-section">
+            <div class="section-title">Education</div>
+            <div class="education-item">
+              <div class="item-header">
+                <div class="item-title">GM UNIVERSITY</div>
+                <div class="item-date">Expected May 2024</div>
+              </div>
+              <div class="item-subtitle">Bachelor of Science in Computer Science</div>
+              <p>GPA: 3.8</p>
+            </div>
+          </div>
+          
+          <div class="resume-section">
+            <div class="section-title">Experience</div>
+            <div class="experience-item">
+              <div class="item-header">
+                <div class="item-title">Software Developer Intern</div>
+                <div class="item-date">Jun 2023 - Aug 2023</div>
+              </div>
+              <div class="item-subtitle">Tech Company Inc.</div>
+              <p>Description of responsibilities and achievements.</p>
+            </div>
+          </div>
+
+          <div class="resume-section">
+            <div class="section-title">Achievements & Certifications</div>
+            <div class="achievement-item">
+              <div class="item-header">
+                <div class="item-title">Dean's List Award</div>
+                <div class="item-date">2023</div>
+              </div>
+              <div class="item-subtitle">GM UNIVERSITY</div>
+              <p>Awarded for academic excellence and outstanding performance.</p>
+            </div>
+          </div>
+
+          <div class="resume-section">
+            <div class="section-title">Languages</div>
+            <div class="skills-list">
+              <div class="skill-tag">English - Native</div>
+              <div class="skill-tag">Spanish - Intermediate</div>
+            </div>
+          </div>
+          
+          <div class="resume-section">
+            <div class="section-title">Skills</div>
+            <div class="skills-list">
+              <div class="skill-tag">JavaScript</div>
+              <div class="skill-tag">Python</div>
+              <div class="skill-tag">React</div>
+              <div class="skill-tag">Data Analysis</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>GMU Resume Builder</h3>
+          <p style="margin-bottom: 1rem;">The official resume building platform for GM UNIVERSITY students and alumni.</p>
+          <p style="font-style: italic; color: var(--gmu-gold); font-size: 0.95rem;">Igniting Innovation, Inspiring Transformation...</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <a href="index.html">Home</a>
+          <a href="builder.html">Resume Builder</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="https://gmu.ac.in" target="_blank">University Portal</a>
+        </div>
+        <div class="footer-section">
+          <h3>Support</h3>
+          <a href="#">Help Center</a>
+          <a href="#">Contact Support</a>
+          <a href="#">Feedback</a>
+        </div>
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <p style="font-weight: 600; color: var(--white); margin-bottom: 0.5rem;">GM UNIVERSITY</p>
+          <p style="font-style: italic; color: var(--gmu-gold); margin-bottom: 1rem; font-size: 0.9rem;">Igniting Innovation, Inspiring Transformation...</p>
+          <p style="margin-bottom: 0.5rem;">Visit our official website for campus details</p>
+          <a href="https://gmu.ac.in" target="_blank" style="font-weight: 600; color: var(--gmu-gold); font-size: 1rem; text-decoration: none; margin-bottom: 1rem; display: inline-block;">www.gmu.ac.in</a>
+          <p style="margin-top: 1rem; margin-bottom: 0.5rem;">Email: <a href="mailto:info@gmu.ac.in" style="color: var(--gmu-gold);">info@gmu.ac.in</a></p>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/school/gm-university" target="_blank" class="social-link" title="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://www.facebook.com/gmuniversity" target="_blank" class="social-link" title="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com/gmuniversity" target="_blank" class="social-link" title="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.instagram.com/gmuniversity" target="_blank" class="social-link" title="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.youtube.com/@gmuniversity" target="_blank" class="social-link" title="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 GM UNIVERSITY Resume Builder. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Auto-save Indicator -->
+  <div class="auto-save-indicator" id="autoSaveIndicator">
+    <span class="auto-save-spinner" id="autoSaveSpinner" style="display: none;"></span>
+    <span id="autoSaveText">Saving...</span>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="js/toast.js"></script>
+  <script src="js/builder.js"></script>
+  <script src="js/ai.js"></script>
+</body>
+</html>

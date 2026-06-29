@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | GMU Resume Builder</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <h1>GMU Resume Builder <span class="gmu-badge">GM UNIVERSITY</span></h1>
+      </div>
+      <nav>
+        <div class="nav-primary">
+          <a href="index.html">Home</a>
+          <a href="dashboard.html" class="active">Dashboard</a>
+          <a href="builder.html">Resume Builder</a>
+        </div>
+        <div class="nav-auth">
+          <span id="userWelcome">Welcome, Student!</span>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Dashboard Header -->
+    <section class="dashboard-header">
+      <div class="dashboard-welcome">
+        <h1>Your Resume Dashboard</h1>
+        <p>Manage and track all your resumes in one place</p>
+      </div>
+      <a href="builder.html" class="btn btn-large">+ Create New Resume</a>
+    </section>
+
+    <!-- Stats Overview -->
+    <section class="stats-overview">
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">📄</div>
+          <div class="stat-info">
+            <h3 id="totalResumes">0</h3>
+            <p>Total Resumes</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">✏️</div>
+          <div class="stat-info">
+            <h3 id="draftResumes">0</h3>
+            <p>Drafts</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">✅</div>
+          <div class="stat-info">
+            <h3 id="completedResumes">0</h3>
+            <p>Completed</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📊</div>
+          <div class="stat-info">
+            <h3 id="lastUpdated">-</h3>
+            <p>Last Updated</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resume List Section -->
+    <section class="resume-section">
+      <div class="section-header">
+        <h2>My Resumes</h2>
+        <div class="section-actions">
+          <input type="text" id="searchResumes" placeholder="Search resumes..." class="search-input">
+          <select id="filterStatus" class="filter-select">
+            <option value="all">All Resumes</option>
+            <option value="draft">Drafts</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="resumeList" class="resume-grid">
+        <!-- Resumes will be dynamically loaded here -->
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">📄</div>
+          <h3>No Resumes Yet</h3>
+          <p>Create your first professional resume to get started!</p>
+          <a href="builder.html" class="btn">Create Your First Resume</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="quick-actions">
+      <h2>Quick Actions</h2>
+      <div class="actions-grid">
+        <div class="action-card">
+          <div class="action-icon">🚀</div>
+          <h3>Resume Templates</h3>
+          <p>Browse professional templates</p>
+          <button class="btn btn-secondary">Browse</button>
+        </div>
+        <div class="action-card">
+          <div class="action-icon">📊</div>
+          <h3>Resume Analysis</h3>
+          <p>Get feedback on your resume</p>
+          <button class="btn btn-secondary">Analyze</button>
+        </div>
+        <div class="action-card">
+          <div class="action-icon">💼</div>
+          <h3>Career Resources</h3>
+          <p>GM UNIVERSITY career resources</p>
+          <button class="btn btn-secondary">Explore</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>GMU Resume Builder</h3>
+          <p style="margin-bottom: 1rem;">The official resume building platform for GM UNIVERSITY students and alumni.</p>
+          <p style="font-style: italic; color: var(--gmu-gold); font-size: 0.95rem;">Igniting Innovation, Inspiring Transformation...</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <a href="index.html">Home</a>
+          <a href="builder.html">Resume Builder</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="https://gmu.ac.in" target="_blank">University Portal</a>
+        </div>
+        <div class="footer-section">
+          <h3>Support</h3>
+          <a href="#">Help Center</a>
+          <a href="#">Contact Support</a>
+          <a href="#">Feedback</a>
+        </div>
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <p style="font-weight: 600; color: var(--white); margin-bottom: 0.5rem;">GM UNIVERSITY</p>
+          <p style="font-style: italic; color: var(--gmu-gold); margin-bottom: 1rem; font-size: 0.9rem;">Igniting Innovation, Inspiring Transformation...</p>
+          <p style="margin-bottom: 0.5rem;">Visit our official website for campus details</p>
+          <a href="https://gmu.ac.in" target="_blank" style="font-weight: 600; color: var(--gmu-gold); font-size: 1rem; text-decoration: none; margin-bottom: 1rem; display: inline-block;">www.gmu.ac.in</a>
+          <p style="margin-top: 1rem; margin-bottom: 0.5rem;">Email: <a href="mailto:info@gmu.ac.in" style="color: var(--gmu-gold);">info@gmu.ac.in</a></p>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/school/gm-university" target="_blank" class="social-link" title="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://www.facebook.com/gmuniversity" target="_blank" class="social-link" title="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com/gmuniversity" target="_blank" class="social-link" title="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.instagram.com/gmuniversity" target="_blank" class="social-link" title="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.youtube.com/@gmuniversity" target="_blank" class="social-link" title="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 GM UNIVERSITY Resume Builder. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Resume Template Modal -->
+  <div id="templateModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Choose a Template</h2>
+      <div class="templates-grid">
+        <div class="template-card" data-template="professional">
+          <div class="template-preview"></div>
+          <h4>Professional</h4>
+          <p>Clean and traditional</p>
+          <button class="btn" onclick="selectTemplate('professional')">Select</button>
+        </div>
+        <div class="template-card" data-template="modern">
+          <div class="template-preview"></div>
+          <h4>Modern</h4>
+          <p>Contemporary design</p>
+          <button class="btn" onclick="selectTemplate('modern')">Select</button>
+        </div>
+        <div class="template-card" data-template="academic">
+          <div class="template-preview"></div>
+          <h4>Academic</h4>
+          <p>Research and education focus</p>
+          <button class="btn" onclick="selectTemplate('academic')">Select</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

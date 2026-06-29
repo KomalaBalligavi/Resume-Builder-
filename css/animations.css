@@ -1,0 +1,237 @@
+/* Animations */
+@keyframes slideIn {
+    from {
+        transform: translateX(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Apply animations to elements */
+.tab-content {
+    animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tab-content.active {
+    animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.education-item, .experience-item, .achievement-item, .language-item, .project-item, .hackathon-item, .certification-item {
+    animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-tag {
+    animation: scaleIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.feature-card {
+    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.feature-card:nth-child(1) { animation-delay: 0.1s; }
+.feature-card:nth-child(2) { animation-delay: 0.2s; }
+.feature-card:nth-child(3) { animation-delay: 0.3s; }
+.feature-card:nth-child(4) { animation-delay: 0.4s; }
+.feature-card:nth-child(5) { animation-delay: 0.5s; }
+.feature-card:nth-child(6) { animation-delay: 0.6s; }
+
+.stat-card {
+    animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.resume-card {
+    animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.builder-message {
+    animation: slideIn 0.3s ease-out;
+}
+
+.resume-section {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Hover effects */
+.tab:hover {
+    transform: translateY(-3px);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.remove-btn:hover {
+    animation: shake 0.5s ease-in-out;
+}
+
+/* Smooth page transitions */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Form field focus effects */
+input:focus, textarea:focus, select:focus {
+    transform: translateY(-2px) scale(1.01);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Preview animations */
+#resumePreview {
+    transition: all 0.3s ease;
+}
+
+.resume-header, .resume-section {
+    transition: all 0.3s ease;
+}
+
+/* Profile image hover effect */
+.resume-profile-image {
+    transition: transform 0.3s ease;
+}
+
+.resume-profile-image:hover {
+    transform: scale(1.05);
+}
+
+/* Button animations */
+button, .btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover, .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 101, 164, 0.3);
+}
+
+button:active, .btn:active {
+    transform: translateY(-1px);
+    transition: all 0.1s ease;
+}
+
+/* Save button success animation */
+@keyframes saveSuccess {
+    0% { 
+        transform: scale(1);
+        background: var(--gmu-blue);
+    }
+    50% { 
+        transform: scale(1.1);
+        background: #2ecc71;
+    }
+    100% { 
+        transform: scale(1);
+        background: var(--gmu-blue);
+    }
+}
+
+.save-success {
+    animation: saveSuccess 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Loading spinner */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading {
+    animation: spin 1s linear infinite;
+}
+
+/* Pulse animation for notifications */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Enhanced tagline animation and visibility */
+.animate-tagline {
+    font-weight: 800;
+    display: inline-block;
+    color: var(--gmu-gold);
+    font-style: italic;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.18);
+    animation: pulse 3s ease-in-out infinite;
+    padding: 0 4px;
+    border-radius: 6px;
+}

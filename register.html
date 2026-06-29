@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register | GMU Resume Builder</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <h1>GMU Resume Builder <span class="gmu-badge">GM UNIVERSITY</span></h1>
+      </div>
+      <nav>
+        <div class="nav-primary">
+          <a href="index.html">Home</a>
+          <a href="builder.html">Resume Builder</a>
+        </div>
+        <div class="nav-auth">
+          <a href="login.html">Login</a>
+          <a href="register.html" class="active">Register</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Register Section -->
+    <section class="auth-section">
+      <div class="auth-container">
+        <div class="auth-header">
+          <h2>Create Your Account</h2>
+          <p>Join thousands of GM UNIVERSITY students building professional resumes</p>
+          <p class="tagline" style="margin-top: 0.5rem; font-size: 0.95rem;">Igniting Innovation, Inspiring Transformation...</p>
+        </div>
+
+        <form id="registerForm" class="auth-form">
+          <div class="form-group">
+            <label for="registerName">Full Name</label>
+            <input 
+              type="text" 
+              id="registerName" 
+              placeholder="Enter your full name"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="registerEmail">GMU Email</label>
+            <input 
+              type="email" 
+              id="registerEmail" 
+              placeholder="your.email@gmu.edu" 
+              required
+            >
+            <small class="form-help">Use your GM UNIVERSITY email address</small>
+          </div>
+
+          <div class="form-group">
+            <label for="registerPassword">Password</label>
+            <input 
+              type="password" 
+              id="registerPassword" 
+              placeholder="Create a strong password" 
+              required
+              minlength="6"
+            >
+            <div class="password-requirements">
+              <small>Password must be at least 6 characters long</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input 
+              type="password" 
+              id="confirmPassword" 
+              placeholder="Confirm your password" 
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="gmuId">GMU ID (Optional)</label>
+            <input 
+              type="text" 
+              id="gmuId" 
+              placeholder="G01234567"
+              pattern="[Gg]\d{8}"
+            >
+            <small class="form-help">Format: G followed by 8 digits</small>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="acceptTerms" required>
+              I agree to the <a href="#" target="_blank">Terms of Service</a> and <a href="#" target="_blank">Privacy Policy</a>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="emailUpdates">
+              Send me resume tips and career opportunity updates
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-large btn-block" id="registerBtn">
+            <span class="btn-text">Create Account</span>
+            <span class="btn-loading" style="display: none;">Creating Account...</span>
+          </button>
+
+          <div class="auth-divider">
+            <span>or</span>
+          </div>
+
+          <button type="button" class="btn btn-secondary btn-block" onclick="registerWithGMU()">
+            Sign up with GMU SSO
+          </button>
+        </form>
+
+        <div class="auth-footer">
+          <p>Already have an account? <a href="login.html">Sign in here</a></p>
+          <p class="auth-note">
+            By creating an account, you agree to our 
+            <a href="#">Terms of Service</a> and 
+            <a href="#">Privacy Policy</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Registration Benefits Sidebar -->
+      <div class="auth-sidebar">
+        <div class="sidebar-content">
+          <h3>Start Your Career Journey</h3>
+          <div class="benefits-list">
+            <div class="benefit-item">
+              <div class="benefit-icon">🚀</div>
+              <div class="benefit-text">
+                <h4>Professional Templates</h4>
+                <p>Access ATS-friendly resume templates designed for success</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">💼</div>
+              <div class="benefit-text">
+                <h4>Career Ready</h4>
+                <p>Build resumes that get noticed by top employers</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">📊</div>
+              <div class="benefit-text">
+                <h4>Smart Analytics</h4>
+                <p>Get instant feedback and improvement suggestions</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">🎓</div>
+              <div class="benefit-text">
+                <h4>GMU Optimized</h4>
+                <p>Specifically designed for GM UNIVERSITY students and alumni</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">🔒</div>
+              <div class="benefit-text">
+                <h4>Secure & Private</h4>
+                <p>Your data is protected with enterprise-grade security</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">📱</div>
+              <div class="benefit-text">
+                <h4>Always Accessible</h4>
+                <p>Access your resumes from any device, anywhere</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>GMU Resume Builder</h3>
+          <p style="margin-bottom: 1rem;">The official resume building platform for GM UNIVERSITY students and alumni.</p>
+          <p style="font-style: italic; color: var(--gmu-gold); font-size: 0.95rem;">Igniting Innovation, Inspiring Transformation...</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <a href="index.html">Home</a>
+          <a href="builder.html">Resume Builder</a>
+          <a href="login.html">Login</a>
+        </div>
+        <div class="footer-section">
+          <h3>Support</h3>
+          <a href="#">Help Center</a>
+          <a href="#">Contact IT Support</a>
+          <a href="#">System Status</a>
+        </div>
+        <div class="footer-section">
+          <h3>Connect With Us</h3>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/school/gm-university" target="_blank" class="social-link" title="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://www.facebook.com/gmuniversity" target="_blank" class="social-link" title="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com/gmuniversity" target="_blank" class="social-link" title="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.instagram.com/gmuniversity" target="_blank" class="social-link" title="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.youtube.com/@gmuniversity" target="_blank" class="social-link" title="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 GM UNIVERSITY Resume Builder. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>
